@@ -9,6 +9,7 @@ export class azureResourceConfig {
      * @visibility secret
      */
     public readonly clientSecret: string,
+    public readonly subscriptions: string[]
   ) {}
 
   static fromConfig(config: Config) : azureResourceConfig | null {
@@ -17,6 +18,7 @@ export class azureResourceConfig {
       azConfig.getString('tenantId'),
       azConfig.getString('clientId'),
       azConfig.getString('clientSecret'),
+      azConfig.getStringArray('subscriptions')
     ) : null;
   }
 }

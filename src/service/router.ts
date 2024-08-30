@@ -57,11 +57,10 @@ export async function createRouter(
         error: 'name must be defined'
       });
     }
-    const query = `ResourceContainers
-| where type =~ "microsoft.resources/subscriptions/resourcegroups"
+    const query = `resources
 | where tags["${tagKey}"] =~ "${tagValue}"`;
     return client.resources(
-      { query: query },
+      { query: query,subscriptions: azureConfig?.subscriptions },
       { resultFormat: 'table' }
     ).then(result => {
       response.send({
