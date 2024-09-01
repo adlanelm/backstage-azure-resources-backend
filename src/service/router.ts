@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { errorHandler } from '@backstage/backend-common';
+import { MiddlewareFactory } from '@backstage/backend-defaults/rootHttpRouter';
 import express from 'express';
+import { LoggerService } from '@backstage/backend-plugin-api'
 import Router from 'express-promise-router';
-import { Logger } from 'winston';
 import { Config } from '@backstage/config';
 import { ResourceGraphClient } from '@azure/arm-resourcegraph';
 import { ClientSecretCredential, DefaultAzureCredential} from '@azure/identity';
 import { azureResourceConfig } from '../config';
 
 export interface RouterOptions {
-  logger: Logger;
-  config: Config;
+  logger: LoggerService;
+  config: Config
 }
 
 export async function createRouter(
@@ -43,7 +43,6 @@ export async function createRouter(
 
   const router = Router();
   router.use(express.json());
-
   router.get('/health', (_, response) => {
     logger.info('PONG!');
     response.send({ status: 'OK - azure resource backend api' });
@@ -159,6 +158,6 @@ export async function createRouter(
     });
   });
 
-  router.use(errorHandler());
+  router.use(MiddlewareFactory.create({config: options.config, logger}).error);
   return router;
 }

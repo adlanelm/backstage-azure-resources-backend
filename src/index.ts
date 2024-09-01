@@ -14,4 +14,5 @@
  * limitations under the License.
  */
 
+export { azureResourcesPlugin as default } from './plugin';
 export * from './service/router';
