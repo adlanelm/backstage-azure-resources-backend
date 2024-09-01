@@ -40,6 +40,7 @@
     "@azure/identity": "^2.1.0",
     "@backstage/backend-common": "^0.24.1",
     "@backstage/backend-defaults": "^0.4.4",
+    "@backstage/backend-plugin-api": "^0.8.1",
     "@backstage/config": "^1.2.0",
     "@types/express": "*",
     "express": "^4.17.1",
