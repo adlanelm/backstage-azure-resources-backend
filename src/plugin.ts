@@ -27,7 +27,7 @@ import {
    * @public
    */
   export const azureResourcesPlugin = createBackendPlugin({
-    pluginId: 'azureResouces-fork',
+    pluginId: 'azure-resources',
     register(env) {
       env.registerInit({
         deps: {
